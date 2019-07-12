@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
-      OrderMailer.order_email(order, User.find(session[:user_id]).email).deliver_later
+      OrderMailer.order_email(order, User.find(session[:user_id]).email).deliver_now
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
